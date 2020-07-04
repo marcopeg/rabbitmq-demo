@@ -60,9 +60,15 @@ const makeConsumer = (conn, ctx) => ({ queue, handler, ...consumer }) =>
     });
   });
 
-const onStartService = async ({ getConfig, getContext }, ctx) => {
+const onStartService = async ({ getConfig, getContext, createHook }, ctx) => {
   const conn = getContext('rabbitmq.conn');
-  return getConfig('rabbitmq.consumers', []).map(makeConsumer(conn, ctx));
+
+  const consumers = [
+    ...getConfig('rabbitmq.consumers', []),
+    ...createHook.sync(hooks.RABBITMQ_REGISTER_WORKER).map(def => def[0])
+  ];
+
+  return consumers.map(makeConsumer(conn, ctx));
 };
 
 module.exports = ({ registerAction, registerHook }) => {
