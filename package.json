@@ -1,0 +1,22 @@
+{
+  "name": "rabbitmq-demo",
+  "version": "1.0.0",
+  "description": "Combines RabbitMQ and FetchQ",
+  "main": "index.js",
+  "scripts": {
+    "send": "node send"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcopeg/rabbitmq-demo.git"
+  },
+  "author": "marco pegoraro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marcopeg/rabbitmq-demo/issues"
+  },
+  "homepage": "https://github.com/marcopeg/rabbitmq-demo#readme",
+  "dependencies": {
+    "amqplib": "^0.5.6"
+  }
+}
