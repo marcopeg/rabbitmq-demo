@@ -13,11 +13,18 @@ amqp.connect(process.env.AMQPSTRING, (err, conn) => {
     }
 
     channel.assertQueue(queue, { durable: false })
+    channel.prefetch(1)
 
     channel.consume(queue, msg => {
-      console.log(" [x] Received %s", msg.content.toString());
+      const complexity = msg.content.toString().split('.').length - 1
+      console.log(" [x] Received %s", msg.content.toString(), complexity);
+
+      setTimeout(() => {
+        console.log('done')
+        channel.ack(msg)
+      }, complexity * 1000)
     }, {
-      noAck: true
+      noAck: false
     })
 
   })

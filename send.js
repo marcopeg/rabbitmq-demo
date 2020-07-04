@@ -1,6 +1,6 @@
 const amqp = require('amqplib/callback_api');
 const queue = 'test1'
-const msg = `Hello ${new Date()}`
+const msg = process.argv.slice(2).join(' ') || `Hello ${new Date()}`
 
 amqp.connect(process.env.AMQPSTRING, (err, conn) => {
   if (err) {
