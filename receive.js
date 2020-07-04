@@ -13,13 +13,12 @@ amqp.connect(process.env.AMQPSTRING, (err, conn) => {
     }
 
     channel.assertQueue(queue, { durable: false })
-    channel.sendToQueue(queue, Buffer.from(msg))
-    console.log(" [x] Sent %s", msg);
 
-    setTimeout(function() {
-      conn.close();
-      process.exit(0);
-    }, 500);
+    channel.consume(queue, msg => {
+      console.log(" [x] Received %s", msg.content.toString());
+    }, {
+      noAck: true
+    })
 
   })
 });

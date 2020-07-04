@@ -4,7 +4,8 @@
   "description": "Combines RabbitMQ and FetchQ",
   "main": "index.js",
   "scripts": {
-    "send": "node send"
+    "send": "node send",
+    "receive": "nodemon receive"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,8 @@
   "homepage": "https://github.com/marcopeg/rabbitmq-demo#readme",
   "dependencies": {
     "amqplib": "^0.5.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
