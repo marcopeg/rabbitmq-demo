@@ -9,6 +9,7 @@
     "start:gitpod:api": "nodemon --watch src src/index",
     "___// Testing Utilities //___": "",
     "test": "yarn test:e2e",
+    "tdd": "yarn tdd:e2e",
     "test:e2e": "./node_modules/.bin/jest --projects test/e2e --runInBand --testTimeout=10000",
     "tdd:e2e": "./node_modules/.bin/jest --projects test/e2e --runInBand --watchAll --testTimeout=10000"
   },
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "axios": "^0.19.2",
+    "fastify": "^2.15.1",
     "jest": "^26.1.0",
     "nodemon": "^2.0.4"
   }

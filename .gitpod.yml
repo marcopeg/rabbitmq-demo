@@ -1,16 +1,22 @@
 image: gitpod/workspace-full
 
 tasks:
-  - name: Emitter
-    init: rm -rf ./.gitpod.lock && yarn install && touch ./.gitpod.lock
-    command: node send.js foobar
-    openIn: bottom
-    openMode: tab-before
   - name: Api
-    init: echo "Awaiting NPM install..." && while ! find ./.gitpod.lock 2> /dev/null 1> /dev/null; do sleep 5; done
+    init: rm -rf ./.gitpod.lock && yarn install && touch ./.gitpod.lock
     command: yarn start:gitpod:api
     openIn: bottom
+    openMode: tab-before
+  - name: Emitter
+    init: echo "Awaiting NPM install..." && while ! find ./.gitpod.lock 2> /dev/null 1> /dev/null; do sleep 5; done
+    command: node send.js foobar
+    openIn: bottom
     openMode: split-right
+  - name: TDD
+    init: echo "Awaiting NPM install..." && while ! find ./.gitpod.lock 2> /dev/null 1> /dev/null; do sleep 5; done
+    command: tdd
+    openIn: bottom
+    openMode: tab-after
+
 #   - name: Unit Tests
 #     init: echo "Awaiting NPM install..." && while ! find ./.gitpod.lock 2> /dev/null 1> /dev/null; do sleep 5; done
 #     command: yarn tdd:unit
@@ -32,17 +38,10 @@ tasks:
 #     openIn: bottom
 #     openMode: tab-after
 
-# ports:
-#   - port: 5432
-#     onOpen: ignore
-#   - port: 8008
-#     onOpen: ignore
-#   - port: 8080
-#     onOpen: ignore
-#   - port: 3000
-#     onOpen: ignore
-#   - port: 6060
-#     onOpen: ignore
+ports:
+  - port: 8008
+    onOpen: ignore
+  - port: 8080
 
 vscode:
   extensions:
