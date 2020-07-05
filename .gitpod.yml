@@ -7,7 +7,7 @@ tasks:
     openIn: bottom
     openMode: tab-before
   - name: Api
-    init: rm -rf ./.gitpod.lock && yarn install && touch ./.gitpod.lock
+    init: echo "Awaiting NPM install..." && while ! find ./.gitpod.lock 2> /dev/null 1> /dev/null; do sleep 5; done
     command: yarn start:gitpod:api
     openIn: bottom
     openMode: split-right
