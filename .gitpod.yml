@@ -3,7 +3,7 @@ image: gitpod/workspace-full
 tasks:
   - name: Emitter
     init: rm -rf ./.gitpod.lock && yarn install && touch ./.gitpod.lock
-    command: yarn send foobar
+    command: node send.js foobar
     openIn: bottom
     openMode: tab-before
   - name: Api

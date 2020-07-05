@@ -21,11 +21,10 @@ const makeQueue = (name, settings = {}) => ({
 
 const settings = ({ setConfig }) => {
   // Validate Environment Variable
-  const env = envalid.cleanEnv(process.env, {
+  envalid.cleanEnv(process.env, {
     PGSTRING: envalid.url(),
     AMQPSTRING: envalid.url(),
   });
-  setConfig('env', env);
 
   // RabbitMQ service connects right away with default settings
   // from the environment variables.
