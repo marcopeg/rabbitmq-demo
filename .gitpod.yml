@@ -10,7 +10,7 @@ tasks:
     init: rm -rf ./.gitpod.lock && yarn install && touch ./.gitpod.lock
     command: yarn start:gitpod:api
     openIn: bottom
-    openMode: tab-after
+    openMode: split-right
 #   - name: Unit Tests
 #     init: echo "Awaiting NPM install..." && while ! find ./.gitpod.lock 2> /dev/null 1> /dev/null; do sleep 5; done
 #     command: yarn tdd:unit
