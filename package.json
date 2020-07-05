@@ -4,7 +4,7 @@
   "description": "Combines RabbitMQ and FetchQ",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index",
+    "start:gitpod:api": "nodemon src/index",
     "send": "node send",
     "receive": "nodemon receive"
   },
@@ -21,6 +21,7 @@
   "dependencies": {
     "@forrestjs/hooks": "^3.9.0",
     "amqplib": "^0.5.6",
+    "envalid": "^6.0.2",
     "fetchq": "^2.6.2"
   },
   "devDependencies": {

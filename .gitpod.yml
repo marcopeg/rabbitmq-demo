@@ -1,7 +1,16 @@
 image: gitpod/workspace-full
-# image: marcopeg/gitpod-workspace-postgres:2.5.0
 
-# tasks:
+tasks:
+  - name: Emitter
+    init: rm -rf ./.gitpod.lock && yarn install && touch ./.gitpod.lock
+    command: yarn send foobar
+    openIn: bottom
+    openMode: tab-before
+  - name: Api
+    init: rm -rf ./.gitpod.lock && yarn install && touch ./.gitpod.lock
+    command: yarn start:gitpod:api
+    openIn: bottom
+    openMode: tab-after
 #   - name: Unit Tests
 #     init: echo "Awaiting NPM install..." && while ! find ./.gitpod.lock 2> /dev/null 1> /dev/null; do sleep 5; done
 #     command: yarn tdd:unit
@@ -11,11 +20,6 @@ image: gitpod/workspace-full
 #     init: echo "Awaiting NPM install..." && while ! find ./.gitpod.lock 2> /dev/null 1> /dev/null; do sleep 5; done
 #     command: yarn tdd:e2e
 #     openIn: right
-#     openMode: tab-after
-#   - name: Api
-#     init: rm -rf ./.gitpod.lock && yarn install && touch ./.gitpod.lock
-#     command: yarn start:gitpod:api
-#     openIn: bottom
 #     openMode: tab-after
 #   - name: Styleguide
 #     init: echo "Awaiting NPM install..." && while ! find ./.gitpod.lock 2> /dev/null 1> /dev/null; do sleep 5; done

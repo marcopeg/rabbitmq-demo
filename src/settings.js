@@ -1,3 +1,5 @@
+const envalid = require('envalid');
+
 const fetchqDefaultQueueSettings = {
   isActive: true,
   enableNotifications: true,
@@ -18,17 +20,15 @@ const makeQueue = (name, settings = {}) => ({
 });
 
 const settings = ({ setConfig }) => {
-  // Setup RabbitMQ
-  // Pick messages from Rabbit and append it to Fetchq
-  // setConfig('rabbitmq.consumers', [
-  //   {
-  //     queue: 'test1',
-  //     handler: async (msg, { ctx }) => {
-  //       console.log('rabbit:', msg.content.toString());
-  //       return ctx.fetchq.doc.append('test1', msg.content.toString());
-  //     },
-  //   },
-  // ]);
+  // Validate Environment Variable
+  const env = envalid.cleanEnv(process.env, {
+    PGSTRING: envalid.url(),
+    AMQPSTRING: envalid.url(),
+  });
+  setConfig('env', env);
+
+  // RabbitMQ service connects right away with default settings
+  // from the environment variables.
 
   // Setup FetchQ
   setConfig('fetchq', {
