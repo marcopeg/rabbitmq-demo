@@ -61,18 +61,24 @@ module.exports = ({ registerAction }) => {
       },
       {
         queue: queues.d1,
+        lock: '500ms',
+        concurrency: 3,
         handler: d1Handler,
       },
       {
         queue: queues.d2,
+        concurrency: 3,
         handler: d2Handler,
       },
       {
         queue: queues.d3,
+        concurrency: 3,
         handler: d3Handler,
       },
       {
         queue: queues.check,
+        lock: '5s',
+        concurrency: 3,
         handler: checkHandler,
       },
     ],

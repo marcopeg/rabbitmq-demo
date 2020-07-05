@@ -54,7 +54,17 @@ const checkHandler = async (doc, { client }) => {
   }
 
   console.log('[ck] %s - COMPLETED', doc.subject);
-  await await client.pool.query(cleanupQuery, [doc.subject]);
+
+  // TRACE: experimental function to follow the execution of a specific
+  //        document across multiple queues
+  // const r = await client.pool.query('SELECT * FROM fetchq_trace($1)', [
+  //   doc.subject,
+  // ]);
+  // console.log(r.rows);
+
+  // DEV: cleans up all the FetchQ info for a specific document so to be
+  //      able to repeat the tests with the same document id
+  // await client.pool.query(cleanupQuery, [doc.subject]);
   return doc.complete();
 };
 

@@ -1,7 +1,7 @@
 const amqp = require('amqplib/callback_api');
 
 const queue = 'test1';
-const msg = '123';
+const msg = Date.now().toString();
 
 describe('feature-poc-delete', () => {
   it('should work', async () => {
