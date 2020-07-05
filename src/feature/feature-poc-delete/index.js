@@ -1,7 +1,12 @@
 const { FEATURE_NAME } = require('./hooks');
 const { queues } = require('./constants');
+
 const rabbitIngestHandler = require('./handlers/rabbit-ingest.handler');
 const mainIngestHandler = require('./handlers/main-ingest.handler');
+const d1Handler = require('./handlers/d1.handler');
+const d2Handler = require('./handlers/d2.handler');
+const d3Handler = require('./handlers/d3.handler');
+const checkHandler = require('./handlers/check.handler');
 
 const fetchqDefaultQueueSettings = {
   isActive: true,
@@ -53,6 +58,22 @@ module.exports = ({ registerAction }) => {
       {
         queue: queues.main,
         handler: mainIngestHandler,
+      },
+      {
+        queue: queues.d1,
+        handler: d1Handler,
+      },
+      {
+        queue: queues.d2,
+        handler: d2Handler,
+      },
+      {
+        queue: queues.d3,
+        handler: d3Handler,
+      },
+      {
+        queue: queues.check,
+        handler: checkHandler,
       },
     ],
   });

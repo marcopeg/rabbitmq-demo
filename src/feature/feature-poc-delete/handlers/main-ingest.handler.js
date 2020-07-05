@@ -13,7 +13,7 @@
 const { queues } = require('../constants');
 
 const mainIngestHandler = async (doc, { client }) => {
-  console.log('%s start', doc.subject, doc.payload);
+  console.log('[mn] %s - START', doc.subject);
 
   const f = await Promise.all([
     client.doc.push(queues.d1, {
@@ -28,17 +28,15 @@ const mainIngestHandler = async (doc, { client }) => {
     client.doc.push(queues.d3, {
       subject: doc.subject,
       payload: doc.payload,
-      nextIteration: '+200ms', // postpone as depends on d1 and d2
+      nextIteration: '+100ms', // depends on d1, but we faile to postpone on purpose to trigger a racing condition
     }),
     client.doc.push(queues.check, {
       subject: doc.subject,
       payload: doc.payload,
-      nextIteration: '+500ms', // postpone as should check d1, d2, d3
+      nextIteration: '+100ms', // also here we force a racing condition
     }),
   ]);
 
-  // await new Promise(r => setTimeout(r, 1000));
-  // console.log('%s finished', doc.subject);
   return doc.complete();
 };
 
