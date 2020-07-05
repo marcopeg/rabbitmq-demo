@@ -4,9 +4,13 @@
   "description": "Combines RabbitMQ and FetchQ",
   "main": "index.js",
   "scripts": {
-    "start:gitpod:api": "nodemon src/index",
-    "send": "node send",
-    "receive": "nodemon receive"
+    "___// Development Utilities //___": "",
+    "start": "yarn start:gitpod:api",
+    "start:gitpod:api": "nodemon --watch src src/index",
+    "___// Testing Utilities //___": "",
+    "test": "yarn test:e2e",
+    "test:e2e": "./node_modules/.bin/jest --projects test/e2e --runInBand --testTimeout=10000",
+    "tdd:e2e": "./node_modules/.bin/jest --projects test/e2e --runInBand --watchAll --testTimeout=10000"
   },
   "repository": {
     "type": "git",
@@ -25,6 +29,8 @@
     "fetchq": "^2.6.2"
   },
   "devDependencies": {
+    "axios": "^0.19.2",
+    "jest": "^26.1.0",
     "nodemon": "^2.0.4"
   }
 }

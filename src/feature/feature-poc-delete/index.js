@@ -1,16 +1,14 @@
 const { FEATURE_NAME } = require('./hooks');
-const deleteIngestHandler = require('./delete-ingest.handler');
+const rabbitIngestHandler = require('./handlers/rabbit-ingest.handler');
+const deleteIngestHandler = require('./handlers/delete-ingest.handler');
 
 module.exports = ({ registerAction }) => {
   registerAction({
     hook: '$RABBITMQ_REGISTER_WORKER',
     name: FEATURE_NAME,
-    handler: () => ( {
+    handler: () => ({
       queue: 'test1',
-      handler: async (msg, { ctx }) => {
-        console.log('rabbit**:', msg.content.toString());
-        return ctx.fetchq.doc.append('test1', msg.content.toString());
-      },
+      handler: rabbitIngestHandler,
     }),
   });
 
@@ -22,6 +20,4 @@ module.exports = ({ registerAction }) => {
       handler: deleteIngestHandler,
     }),
   });
-
-  
 };
