@@ -13,7 +13,7 @@ tasks:
     openMode: split-right
   - name: TDD
     init: echo "Awaiting NPM install..." && while ! find ./.gitpod.lock 2> /dev/null 1> /dev/null; do sleep 5; done
-    command: tdd
+    command: yarn tdd
     openIn: bottom
     openMode: tab-after
 
