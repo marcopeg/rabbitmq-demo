@@ -63,9 +63,11 @@ const makeConsumer = (conn, ctx) => ({ queue, handler, ...consumer }) =>
 const onStartService = async ({ getConfig, getContext, createHook }, ctx) => {
   const conn = getContext('rabbitmq.conn');
 
+  // @TODO: each REGISTER_WORKER should be able to return a list of workers to setup
+
   const consumers = [
     ...getConfig('rabbitmq.consumers', []),
-    ...createHook.sync(hooks.RABBITMQ_REGISTER_WORKER).map(def => def[0])
+    ...createHook.sync(hooks.RABBITMQ_REGISTER_WORKER).map(def => def[0]),
   ];
 
   return consumers.map(makeConsumer(conn, ctx));

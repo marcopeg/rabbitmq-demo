@@ -19,8 +19,15 @@ describe('feature-poc-delete', () => {
           }
 
           channel.assertQueue(queue, { durable: false });
+
+          // Pushes multiple tasks with the same subject to simulate
+          // high intensity data ingestion and a simple deduple mechanism
+          // thanks to FetchQ
           channel.sendToQueue(queue, Buffer.from(msg));
-          console.log('Sent: %s', msg);
+          channel.sendToQueue(queue, Buffer.from(msg));
+          channel.sendToQueue(queue, Buffer.from(msg));
+          channel.sendToQueue(queue, Buffer.from(msg));
+          console.log('Sent: %s (4 times)', msg);
 
           setTimeout(function() {
             conn.close();
