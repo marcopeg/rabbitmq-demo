@@ -7,7 +7,7 @@ const { queues } = require('../constants');
 
 const query = `
   SELECT iterations
-  FROM fetchq_catalog.fetchq__${queues.d2}__documents
+  FROM fetchq_catalog.fetchq__${queues.d1}__documents
   WHERE subject = $1
     AND status = 3
   LIMIT 1
@@ -29,7 +29,7 @@ const d3Handler = async (doc, { client }) => {
 
   // simulate the execution of an asynchronous task
   console.log('[d3] %s - execute task', doc.subject);
-  await new Promise(r => setTimeout(r, 100));
+  await new Promise(r => setTimeout(r, 150));
 
   return doc.complete();
 };

@@ -23,17 +23,17 @@ const mainIngestHandler = async (doc, { client }) => {
     client.doc.push(queues.d2, {
       subject: doc.subject,
       payload: doc.payload,
-      nextIteration: '+100ms', // postpone as depends on d1
+      nextIteration: '+50ms', // postpone as depends on d1
     }),
     client.doc.push(queues.d3, {
       subject: doc.subject,
       payload: doc.payload,
-      nextIteration: '+100ms', // depends on d1, but we faile to postpone on purpose to trigger a racing condition
+      nextIteration: '+50ms', // depends on d1, but we faile to postpone on purpose to trigger a racing condition
     }),
     client.doc.push(queues.check, {
       subject: doc.subject,
       payload: doc.payload,
-      nextIteration: '+100ms', // also here we force a racing condition
+      nextIteration: '+25ms', // also here we force a racing condition
     }),
   ]);
 

@@ -19,7 +19,7 @@ const settings = ({ setConfig }) => {
     maintenance: {
       limit: 1,
       delay: 10,
-      sleep: 100,
+      sleep: 500,
     },
   });
 };

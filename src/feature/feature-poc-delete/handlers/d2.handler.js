@@ -24,7 +24,7 @@ const d2Handler = async (doc, { client }) => {
 
   // simulate the execution of an asynchronous task
   console.log('[d2] %s - execute task', doc.subject);
-  await new Promise(r => setTimeout(r, 100));
+  await new Promise(r => setTimeout(r, 150));
 
   return doc.complete();
 };
