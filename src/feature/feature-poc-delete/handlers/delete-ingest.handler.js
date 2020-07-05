@@ -1,5 +1,5 @@
 const deleteIngestHandler = doc => {
-  console.log(doc.payload);
+  console.log(doc);
   return doc.drop();
 };
 

@@ -39,9 +39,8 @@ tasks:
 #     openMode: tab-after
 
 ports:
-  - port: 8008
-    onOpen: ignore
   - port: 8080
+    onOpen: ignore
 
 vscode:
   extensions:
