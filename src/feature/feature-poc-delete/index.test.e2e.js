@@ -12,7 +12,7 @@ describe('feature-poc-delete', () => {
           return;
         }
 
-        conn.createChannel((err, channel) => {
+        conn.createChannel(async (err, channel) => {
           if (err) {
             reject(err);
             return;
@@ -23,16 +23,19 @@ describe('feature-poc-delete', () => {
           // Pushes multiple tasks with the same subject to simulate
           // high intensity data ingestion and a simple deduple mechanism
           // thanks to FetchQ
-          channel.sendToQueue(queue, Buffer.from(msg));
-          channel.sendToQueue(queue, Buffer.from(msg));
-          channel.sendToQueue(queue, Buffer.from(msg));
-          channel.sendToQueue(queue, Buffer.from(msg));
-          console.log('Sent: %s (4 times)', msg);
+          //
+          // The goal is to simulate the DDT behaviour of emitting an event
+          // that target 1 single ID multiple times.
+          //
+          // This is the emitter. The "rabbit-ingest.handler.js" uses the
+          // "upsert()" API to keep pushing the execution of the task some
+          // milliseconds in the future.
+          for (let i = 0; i < 10; i++) {
+            channel.sendToQueue(queue, Buffer.from(msg));
+            await new Promise(r => setTimeout(r, 50));
+          }
 
-          setTimeout(function() {
-            conn.close();
-            resolve();
-          }, 500);
+          resolve();
         });
       });
     });

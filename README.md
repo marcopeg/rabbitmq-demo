@@ -55,3 +55,40 @@ You can set up both these resources for free using free-tier services at:
 
 **NOTE:** Make sure you [configure your GitPod settings](https://www.gitpod.io/docs/environment-variables/)
 with the proper environment variabels before you hit the button above.
+
+## Relevant Files
+
+### src/feature/feature-poc-delete/index.test.e2e.js
+
+This is an automated test that gets executed usin [jest](https://jestjs.io/) which is
+one of the most widely used test environment for node/react.
+
+It simulates the asynchronous emission of a repeated message into a RabbitMQ channel.
+The idea is to simulate the DDT lines get updated one by one, queuing a task (or broadcasting
+a message) that refers to the same order.
+
+**Take into account that the goal is not to touch the current DDT application.**
+
+### src/feature/feature-poc-delete/handlers/rabbit-ingest.handler.js
+
+This is the entry point of this service, it subscribes to the RabbitMQ channel or topic
+and forwards the task/message into FetchQ that is capable of natively handling:
+
+- message/event deduplication
+- message/event throttling
+
+The idea is to set a task some time in the future, and keep pushing it further more into
+the future as long the DDT keeps emitting messages with the same DDT-ID.
+
+### src/feature/feature-poc-delete/handlers/check.handler.js
+
+This is the last message handler that checks whether a list of known tasks have been
+completed, in order to do something.
+
+The goal here is to simulate a **complex execution of asynchronous, distributed but
+interdependent pieces of computations**. You can see those "pieces" in the
+`d1, d2, d3` handlers. Simple functions that we use as placeholders for more intersting stuff.
+
+The goal is to await an eventually consistent execution of independently executed tasks
+that may fail for any possible reason and need to handle this possibility without
+increasing the complexity of the system.
