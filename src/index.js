@@ -5,9 +5,9 @@ const { settings } = require('./settings');
  * Services
  */
 
-const serviceFetchq = require('./service/service-fetchq');
+const serviceFetchq = require('@forrestjs/service-fetchq');
+const serviceFastify = require('@forrestjs/service-fastify');
 const serviceRabbitmq = require('./service/service-rabbitmq');
-const serviceFastify = require('./service/service-fastify');
 const serviceTdd = require('./service/service-tdd');
 
 /**

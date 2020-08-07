@@ -24,10 +24,12 @@
   },
   "homepage": "https://github.com/marcopeg/rabbitmq-demo#readme",
   "dependencies": {
-    "@forrestjs/hooks": "^3.9.0",
+    "@forrestjs/hooks": "^3.13.7",
+    "@forrestjs/service-fastify": "^3.13.7",
+    "@forrestjs/service-fastify-fetchq": "^3.13.7",
+    "@forrestjs/service-fetchq": "^3.13.7",
     "amqplib": "^0.5.6",
-    "envalid": "^6.0.2",
-    "fetchq": "^2.6.2"
+    "envalid": "^6.0.2"
   },
   "devDependencies": {
     "axios": "^0.19.2",
